@@ -6,7 +6,15 @@ console.error("Logs from your program will appear here!");
 const server: net.Server = net.createServer((connection: net.Socket) => {
   connection.on("data", (data) => {
     console.log("data ", data.toString());
-    connection.write("+PONG\r\n");
+
+    const command = data.toString().trim();
+    const parts = command.split(/\s+/);
+
+    if (parts[0] == "echo") {
+      connection.write(parts.slice(1).join(" "));
+    } else if (parts[0] == "ping") {
+      connection.write("+PONG\r\n");
+    }
   });
 });
 
