@@ -11,7 +11,7 @@ const server: net.Server = net.createServer((connection: net.Socket) => {
     if (command[2].toUpperCase() === "ECHO") {
       let response: string[] = [];
       command.forEach((value, index) => {
-        if (index % 2 === 1 && index > 2) {
+        if (index % 2 === 0 && index > 2) {
           response.push(value);
         }
       });
