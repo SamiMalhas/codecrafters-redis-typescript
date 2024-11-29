@@ -5,13 +5,8 @@ console.error("Logs from your program will appear here!");
 
 const server: net.Server = net.createServer((connection: net.Socket) => {
   connection.on("data", (data) => {
-    console.log("data ", data);
+    console.log("data ", data.toString());
     connection.write("+PONG\r\n");
-    connection.end();
-  });
-  connection.on("close", () => {
-    connection.end();
-    server.close();
   });
 });
 
