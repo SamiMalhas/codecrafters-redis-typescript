@@ -9,6 +9,7 @@ const server: net.Server = net.createServer((connection: net.Socket) => {
 
     const command = data.toString().trim();
     const parts = command.split(/\s+/);
+    console.log(command + " ----- " + parts);
 
     if (parts[0] == "echo") {
       connection.write(`+${parts.slice(1).join(" ")}\r\n`);
