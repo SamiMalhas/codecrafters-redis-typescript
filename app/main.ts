@@ -8,13 +8,13 @@ const server: net.Server = net.createServer((connection: net.Socket) => {
     console.log("data ", data.toString());
 
     const command = data.toString().split("\r\n");
-    console.log(command + " ----- ");
+    console.log(command + " ----- " + command[1] + " ----- " + command[2]);
 
-    // if (parts[0] == "echo") {
-    //   connection.write(`+${parts.slice(1).join(" ")}\r\n`);
-    // } else if (parts[0] == "ping") {
-    //   connection.write("+PONG\r\n");
-    // }
+    if (command[1] == "echo") {
+      connection.write(`+${command.slice(1).join(" ")}\r\n`);
+    } else if (command[0] == "ping") {
+      connection.write("+PONG\r\n");
+    }
   });
 });
 
