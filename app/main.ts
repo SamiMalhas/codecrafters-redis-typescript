@@ -7,7 +7,7 @@ const server: net.Server = net.createServer((connection: net.Socket) => {
   connection.on("data", (data) => {
     console.log("data ", data.toString());
 
-    const command = data.toString().trim();
+    const command = data.toString();
     const parts = command.split(/\s+/);
     console.log(command + " ----- " + parts);
 
