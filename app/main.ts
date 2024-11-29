@@ -1,21 +1,20 @@
 import * as net from "net";
 
 // You can use print statements as follows for debugging, they'll be visible when running tests.
-console.error("Logs from your program will appear here!");
+console.log("Logs from your program will appear here!");
 
 const server: net.Server = net.createServer((connection: net.Socket) => {
   connection.on("data", (data) => {
     console.log("data ", data.toString());
 
-    const command = data.toString();
-    const parts = command.split(/\s+/);
-    console.log(command + " ----- " + parts);
+    const command = data.toString().split("\r\n");
+    console.log(command + " ----- ");
 
-    if (parts[0] == "echo") {
-      connection.write(`+${parts.slice(1).join(" ")}\r\n`);
-    } else if (parts[0] == "ping") {
-      connection.write("+PONG\r\n");
-    }
+    // if (parts[0] == "echo") {
+    //   connection.write(`+${parts.slice(1).join(" ")}\r\n`);
+    // } else if (parts[0] == "ping") {
+    //   connection.write("+PONG\r\n");
+    // }
   });
 });
 
