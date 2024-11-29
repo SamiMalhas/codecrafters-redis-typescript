@@ -8,11 +8,15 @@ const server: net.Server = net.createServer((connection: net.Socket) => {
     console.log("data ", data.toString());
 
     const command = data.toString().split("\r\n");
-    console.log(command + " ----- " + command[1] + " ----- " + command[2]);
-
-    if (command[1] == "echo") {
-      connection.write(`+${command.slice(1).join(" ")}\r\n`);
-    } else if (command[0] == "ping") {
+    if (command[2].toUpperCase() === "ECHO") {
+      let response: string[] = [];
+      command.forEach((value, index) => {
+        if (index % 2 === 1 && index > 2) {
+          response.push(value);
+        }
+      });
+      connection.write(`+${response.join(" ")}\r\n`);
+    } else if (command[2].toUpperCase() == "PING") {
       connection.write("+PONG\r\n");
     }
   });
