@@ -11,7 +11,7 @@ const server: net.Server = net.createServer((connection: net.Socket) => {
     const parts = command.split(/\s+/);
 
     if (parts[0] == "echo") {
-      connection.write(parts.slice(1).join(" "));
+      connection.write(`+${parts.slice(1).join(" ")}\r\n`);
     } else if (parts[0] == "ping") {
       connection.write("+PONG\r\n");
     }
